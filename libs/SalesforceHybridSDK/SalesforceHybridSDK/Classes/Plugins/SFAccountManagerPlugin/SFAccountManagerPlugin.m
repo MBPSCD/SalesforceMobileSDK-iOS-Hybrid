@@ -64,6 +64,10 @@ NSString * const kUserAccountClientIdDictKey       = @"clientId";
     [self getVersion:@"getUsers" withArguments:command.arguments];
     NSMutableArray *userAccountArray = [NSMutableArray array];
     for (SFUserAccount *account in [SFUserAccountManager sharedInstance].allUserAccounts) {
+        if(!account.credentials || !account.idData){
+            continue;
+        }
+
         [userAccountArray addObject:[self dictionaryFromUserAccount:account]];
     }
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:userAccountArray];
