@@ -92,11 +92,9 @@
     self.window.autoresizesSubviews = YES;
     
     [self initializeAppViewState];
-     __weak __typeof (self) weakSelf = self;
 
-    [SFSDKAuthHelper loginIfRequired:^{
-        [weakSelf setupRootViewController];
-    }];
+//  updated by MBPSCD , to fix plugin not return successfully issue
+     [self setupRootViewController];
 
     return YES; // we don't want to run's Cordova didFinishLaunchingWithOptions - it creates another window with a webview
                 // if devs want to customize their AppDelegate.m, then they should get rid of AppDelegate+SalesforceHybrid.m
